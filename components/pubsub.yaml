@@ -1,0 +1,73 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: order_pub_sub
+# LOCAL
+# spec:
+#   type: pubsub.redis
+#   version: v1
+#   metadata:
+#   - name: redisHost
+#     value: localhost:6379
+  
+# AZURE
+# spec:
+#   type: pubsub.azure.servicebus
+#   version: v1
+#   metadata:
+#   - name: connectionString
+#     secretKeyRef:
+#       name: connectionStrings:azure
+#       key: connectionStrings:azure
+
+
+# AWS
+# spec:
+#   type: pubsub.snssqs
+#   version: v1
+#   metadata:
+#     - name: accessKey
+#       secretKeyRef:
+#         name: aws:accessKey
+#         key: aws:accessKey
+#     - name: secretKey
+#       secretKeyRef:
+#         name: aws:secretKey
+#         key: aws:secretKey
+#     - name: region
+#       value: "us-east-1"
+
+# GOOGLE
+spec:
+  type: pubsub.gcp.pubsub
+  version: v1
+  metadata:
+  - name: type
+    value: service_account
+  - name: projectId
+    secretKeyRef:
+      name: google:projectId
+      key: google:projectId
+  - name: privateKeyId
+    secretKeyRef:
+      name: google:privateKeyId
+      key: google:privateKeyId
+  - name: clientEmail
+    secretKeyRef:
+      name: google:clientEmail
+      key: google:clientEmail
+  - name: authUri
+    value: https://accounts.google.com/o/oauth2/auth
+  - name: tokenUri
+    value: https://oauth2.googleapis.com/token
+  - name: authProviderX509CertUrl
+    value: https://www.googleapis.com/oauth2/v1/certs
+  - name: clientX509CertUrl
+    value: https://www.googleapis.com/robot/v1/metadata/x509/sns-testing%40appspot.gserviceaccount.com
+  - name: privateKey
+    secretKeyRef:
+      name: google:privateKey
+      key: google:privateKey
+
+auth:
+  secretStore: local-secret-store

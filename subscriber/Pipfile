@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+dapr-ext-fastapi = "==1.5.0"
+cloudevents = "*"
+uvicorn = "*"
+
+[dev-packages]
+black = "*"
+mypy = "*"
+flake8 = "*"
+bandit = "*"
+
+[requires]
+python_version = "3.10"
